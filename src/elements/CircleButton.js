@@ -5,7 +5,7 @@ import { createIconSet } from '@expo/vector-icons';
 import fontAwsome from '../../assets/fonts/fa-solid-900.ttf';
 
 // 使用するアイコンの名前とアイコンのidをセットで格納する
-const glyphMap = { pencil: '\uf303', plus: '\uf067' };
+const glyphMap = { pencil: '\uf303', plus: '\uf067', check: '\uf00c' };
 const CustomIcon = createIconSet(glyphMap, 'FontAwsome', 'custom-icon-font.ttf');
 
 class CircleButton extends React.Component {
