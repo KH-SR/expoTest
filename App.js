@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Appbar from './src/components/Appbar';
 
-import MemoEditScreen from './src/screens/MemoEditScreen';
+import SignupScreen from './src/screens/SignupScreen';
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
 
       <StatusBar style="auto" />
       <Appbar />
-      <MemoEditScreen />
+      <SignupScreen />
 
     </View>
   );
