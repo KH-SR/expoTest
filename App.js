@@ -16,17 +16,18 @@ function MyStack() {
     <Stack.Navigator
       screenOptions={{
         headerTitle: 'HYOTEI',
+        headerBackTitleVisible: false,
         headerTintColor: 'white',
         headerTitleAlign: 'center',
         headerStyle: { backgroundColor: '#00adff' },
         headerTitleStyle: { color: '#fff' },
       }}
     >
+      <Stack.Screen name="login" component={LoginScreen} />
+      <Stack.Screen name="signup" component={SignupScreen} />
       <Stack.Screen name="list" component={MemoListScreen} />
       <Stack.Screen name="detail" component={MemoDetailScreen} />
       <Stack.Screen name="edit" component={MemoEditScreen} />
-      <Stack.Screen name="login" component={LoginScreen} />
-      <Stack.Screen name="signup" component={SignupScreen} />
     </Stack.Navigator>
   );
 }

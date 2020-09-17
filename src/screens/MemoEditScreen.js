@@ -10,7 +10,10 @@ class MemoEditScreen extends React.Component {
     // マルチラインで複数行のTextInputを可能にする
       <View style={styles.container}>
         <TextInput style={styles.memoEditInput} multiline value="HYOTEI" />
-        <CircleButton name="check" />
+        <CircleButton
+          name="check"
+          onPress={() => { this.props.navigation.goBack(); }}
+        />
       </View>
     );
   }
@@ -29,6 +32,7 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingBottom: 36,
     fontSize: 16,
+    textAlignVertical: 'top',
   },
 });
 

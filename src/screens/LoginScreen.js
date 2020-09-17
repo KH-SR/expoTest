@@ -11,7 +11,10 @@ class LoginScreen extends React.Component {
         <TextInput style={styles.input} value="Email Address" />
         <TextInput style={styles.input} value="Password" />
         {/* Buttonメソッドは設定をいじれないので、これでボタンを作る */}
-        <TouchableHighlight style={styles.button} onPress={() => {}}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => { this.props.navigation.navigate('list'); }}
+        >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
       </View>
