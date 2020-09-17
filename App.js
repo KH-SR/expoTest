@@ -1,31 +1,27 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { StatusBar } from 'expo-status-bar';
-import Appbar from './src/components/Appbar';
+import MemoListScreen from './src/screens/MemoListScreen';
 
-import SignupScreen from './src/screens/SignupScreen';
+const Stack = createStackNavigator();
 
-export default function App() {
+function MyStack() {
   return (
-    <View style={styles.container}>
-
-      <StatusBar style="auto" />
-      <Appbar />
-      <SignupScreen />
-
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={MemoListScreen} />
+      {/* <Stack.Screen name="Notifications" component={Notifications} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} /> */}
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    // flexで画面自体を画面いっぱいに広げている
-    flex: 1,
-    backgroundColor: '#ebfeff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // ヘッダーが見える様に、トップは常に画面から開けておいてあげる
-    paddingTop: 60,
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
