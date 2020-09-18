@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet, View, Text, TextInput, TouchableHighlight,
 } from 'react-native';
+import firebase from 'firebase';
 
 class LoginScreen extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -12,8 +13,14 @@ class LoginScreen extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   handleSubmit() {
-    console.log('login');
-    // {this.props.navigation.navigate('list')}
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((result) => {
+        console.log('sucsees', result.user);
+        { this.props.navigation.navigate('list'); }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
