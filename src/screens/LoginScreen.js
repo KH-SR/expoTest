@@ -4,16 +4,43 @@ import {
 } from 'react-native';
 
 class LoginScreen extends React.Component {
+  // eslint-disable-next-line react/state-in-constructor
+  state = {
+    email: '',
+    password: '',
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleSubmit() {
+    console.log('login');
+    // {this.props.navigation.navigate('list')}
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>ログイン</Text>
-        <TextInput style={styles.input} value="Email Address" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={this.state.email}
+          onChangeText={(text) => { this.setState({ email: text }); }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email Address"
+        />
+        <TextInput
+          style={styles.input}
+          value={this.state.password}
+          onChangeText={(text) => { this.setState({ password: text }); }}
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          secureTextEntry
+        />
         {/* Buttonメソッドは設定をいじれないので、これでボタンを作る */}
         <TouchableHighlight
           style={styles.button}
-          onPress={() => { this.props.navigation.navigate('list'); }}
+          onPress={this.handleSubmit.bind(this)}
         >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
