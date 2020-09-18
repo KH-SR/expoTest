@@ -10,8 +10,11 @@ import SignupScreen from './src/screens/SignupScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
 
 import ENV from './env.json';
+
+require('firebase/firestore');
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
@@ -38,11 +41,13 @@ function MyStack() {
         headerTitleStyle: { color: '#fff' },
       }}
     >
+
       <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="signup" component={SignupScreen} />
       <Stack.Screen name="list" component={MemoListScreen} />
       <Stack.Screen name="detail" component={MemoDetailScreen} />
       <Stack.Screen name="edit" component={MemoEditScreen} />
+      <Stack.Screen name="create" component={MemoCreateScreen} />
     </Stack.Navigator>
   );
 }
