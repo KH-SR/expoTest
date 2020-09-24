@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  StyleSheet, View, Text, TextInput, TouchableHighlight,
+  StyleSheet, View, Text, TextInput, TouchableHighlight, TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase';
+import { CommonActions } from '@react-navigation/native';
 
 class LoginScreen extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -14,14 +15,23 @@ class LoginScreen extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   handleSubmit() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((result) => {
-        console.log('login', result.user.uid);
-        // eslint-disable-next-line no-lone-blocks
-        this.props.navigation.navigate('list', { uid: result.user.uid });
+      .then(() => {
+        this.props.navigation.dispatch(
+          CommonActions.reset({
+            // 画面遷移するインデックス(list2に遷移したい場合は1になる)
+            index: 0,
+            // 新しく設定したい画面遷移図
+            routes: [{ name: 'list' }],
+          }),
+        );
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  handlePress() {
+    this.props.navigation.navigate('signup');
   }
 
   render() {
@@ -52,6 +62,10 @@ class LoginScreen extends React.Component {
         >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity style={styles.signup} onPress={this.handlePress.bind(this)}>
+          <Text>メンバー登録する</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -92,6 +106,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  signup: {
+    marginTop: 16,
+    alignSelf: 'center',
   },
 });
 

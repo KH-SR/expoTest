@@ -14,7 +14,6 @@ class MemoEditScreen extends React.Component {
   componentDidMount() {
     // ...memoを使用してmemoの中身を一つずつ取り出して渡ってきたからこの記載になる
     const { body, key } = this.props.route.params;
-    console.log(body, key);
     this.setState({ body, key });
   }
 

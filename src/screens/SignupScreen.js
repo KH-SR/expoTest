@@ -3,17 +3,25 @@ import {
   StyleSheet, View, Text, TextInput, TouchableHighlight,
 } from 'react-native';
 import firebase from 'firebase';
+import { CommonActions } from '@react-navigation/native';
 
 class SignupScreen extends React.Component {
   state = {
-    email: 'atobe@hyotei.com',
-    password: 'katunoha',
+    email: '',
+    password: '',
   }
 
   handleSubmit() {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((result) => {
-        this.props.navigation.navigate('list');
+      .then(() => {
+        this.props.navigation.dispatch(
+          CommonActions.reset({
+            // 画面遷移するインデックス(list2に遷移したい場合は1になる)
+            index: 0,
+            // 新しく設定したい画面遷移図
+            routes: [{ name: 'list' }],
+          }),
+        );
       })
       .catch((error) => {
         console.log(error);

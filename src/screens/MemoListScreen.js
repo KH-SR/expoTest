@@ -15,6 +15,7 @@ async componentDidMount() {
   await db.collection(`users/${currentUser.uid}/memos`)
     .onSnapshot((snapshot) => {
       const memoList = [];
+      // eslint-disable-next-line consistent-return
       snapshot.forEach((doc) => {
         if (snapshot == null) { return null; }
         // キーを渡さないと警告が出るので、memoのユニークidを渡してあげる（...で数が不明瞭のデータを表せる）
@@ -22,23 +23,10 @@ async componentDidMount() {
       });
       this.setState({ memoList });
     });
-  // .get()
-  // .then((snapshot) => {
-  //   const memoList = [];
-  //   snapshot.forEach((doc) => {
-  //     //キーを渡さないと警告が出るので、memoのユニークidを渡してあげる（...で数が不明瞭のデータを表せる）
-  //     memoList.push({ ...doc.data(), key: doc.id });
-  //   });
-  //   this.setState({ memoList });
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
 }
 
 handlePress() {
   this.props.navigation.navigate('create');
-  console.log('転送', this.props.route.params);
 }
 
 render() {
