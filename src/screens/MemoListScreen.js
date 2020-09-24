@@ -13,17 +13,27 @@ async componentDidMount() {
   const { currentUser } = firebase.auth();
   const db = firebase.firestore();
   await db.collection(`users/${currentUser.uid}/memos`)
-    .get()
-    .then((snapshot) => {
+    .onSnapshot((snapshot) => {
       const memoList = [];
       snapshot.forEach((doc) => {
+        if (snapshot == null) { return null; }
+        // キーを渡さないと警告が出るので、memoのユニークidを渡してあげる（...で数が不明瞭のデータを表せる）
         memoList.push({ ...doc.data(), key: doc.id });
       });
       this.setState({ memoList });
-    })
-    .catch((error) => {
-      console.log(error);
     });
+  // .get()
+  // .then((snapshot) => {
+  //   const memoList = [];
+  //   snapshot.forEach((doc) => {
+  //     //キーを渡さないと警告が出るので、memoのユニークidを渡してあげる（...で数が不明瞭のデータを表せる）
+  //     memoList.push({ ...doc.data(), key: doc.id });
+  //   });
+  //   this.setState({ memoList });
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
 }
 
 handlePress() {

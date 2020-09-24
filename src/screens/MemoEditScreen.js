@@ -12,21 +12,31 @@ class MemoEditScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { memo } = this.props.route.params;
-    this.setState({ body: memo.body, key: memo.key });
+    // ...memoを使用してmemoの中身を一つずつ取り出して渡ってきたからこの記載になる
+    const { body, key } = this.props.route.params;
+    console.log(body, key);
+    this.setState({ body, key });
   }
 
   handlePress() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
+    const newDate = firebase.firestore.Timestamp.now();
     // 更新する箇所の設定
     db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key)
       .update({
         // 更新する内容の設定
         body: this.state.body,
+        createdOn: newDate,
       })
       .then(() => {
-        console.log('成功');
+        // 前の画面に値を反映させる
+        this.props.route.params.returnMemo({
+          body: this.state.body,
+          key: this.state.key,
+          createdOn: newDate,
+        });
+        this.props.navigation.goBack();
       })
       .catch((error) => {
         console.log(error);
