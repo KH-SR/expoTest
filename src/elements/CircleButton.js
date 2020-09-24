@@ -71,10 +71,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+    // iosのみのシャドウ設定
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
+    // Andoroidのみのシャドウ設定
+    elevation: 4,
   },
   circleBtnTitle: {
     fontFamily: 'FontAwsome',
