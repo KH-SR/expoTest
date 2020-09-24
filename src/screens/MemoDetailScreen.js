@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import CircleButton from '../elements/CircleButton';
 
+const dateString = (date) => {
+  if (date == null) { return ''; }
+  // firebaseのTimestamp型をDate型に変換する
+  const dateObject = date.toDate();
+  // Tで分割して前半部の[0]だけ使用する
+  return dateObject.toISOString().split('T')[0];
+};
+
 class MemoDetailScreen extends React.Component {
+  state = {
+    memo: {},
+  }
+
+  componentDidMount() {
+    const { memo } = this.props.route.params;
+    this.setState({ memo });
+  }
+
   render() {
+    // stateの中からmemoを取り出す
+    const { memo } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
-          <Text style={styles.memoHeaderTitle}>跡部様</Text>
-          <Text style={styles.memoHeaderDate}>2020/10/4</Text>
+          <Text style={styles.memoHeaderTitle}>{memo.body ? memo.body.substring(0, 12) : ''}</Text>
+          <Text style={styles.memoHeaderDate}>{dateString(memo.createdOn)}</Text>
         </View>
 
         <View style={styles.memoContent}>
-          <Text>跡部様の誕生日です。</Text>
+          <Text style={styles.memoBody}>{memo.body}</Text>
         </View>
         <CircleButton
           name="pencil"
           color="white"
           style={styles.editButton}
-          onPress={() => { this.props.navigation.navigate('edit'); }}
+          onPress={() => { this.props.navigation.navigate('edit', { memo }); }}
         />
       </View>
     );
@@ -53,6 +72,10 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     backgroundColor: '#fff',
     flex: 1,
+  },
+  memoBody: {
+    lineHeight: 22,
+    fontSize: 15,
   },
   editButton: {
     top: 75,
