@@ -17,8 +17,7 @@ async componentDidMount() {
     .then((snapshot) => {
       const memoList = [];
       snapshot.forEach((doc) => {
-        console.log(doc.data());
-        memoList.push(doc.data());
+        memoList.push({ ...doc.data(), key: doc.id });
       });
       this.setState({ memoList });
     })
