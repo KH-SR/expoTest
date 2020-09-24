@@ -15,7 +15,8 @@ class MemoCreateScreen extends React.Component {
     const { uid } = this.props.route.params;
     console.log('保存', uid.uid);
     const db = firebase.firestore();
-    db.collection(`users/${uid.uid}/memos`).add({
+    const { currentUser } = firebase.auth();
+    db.collection(`users/${currentUser.uid}/memos`).add({
       body: this.state.body,
       createdOn: new Date(),
     })

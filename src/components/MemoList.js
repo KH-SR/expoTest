@@ -5,6 +5,7 @@ import {
 
 class MemoList extends React.Component {
   render() {
+    console.log('渡ってきたよ', this.props.memoList);
     return (
 
       <View style={styles.memoList}>
